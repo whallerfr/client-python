@@ -36,7 +36,7 @@ pip install -r requirements.txt
 Before running examples scripts, you must create a `env.py` file with the following content as indicated in the `env.orig.py` file at the root of the examples folder:
 
 ```python
-BASE_URL = "https://api.whaller.com"
+BASE_URL = "https://my.whaller.com"
 CLIENT_ID = "your_client_id"
 CLIENT_TOKEN = "your_client_token"
 LOGIN = "your_email"
