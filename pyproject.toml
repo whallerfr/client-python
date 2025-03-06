@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "whaller-client"
-version = "0.1.0"
+version = "0.1.1"
 description = "SDK Python pour interagir avec l'API Whaller"
 authors = [
     {name = "Thomas Fauré", email = "thomas.faure@whaller.com"},
