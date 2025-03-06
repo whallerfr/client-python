@@ -38,7 +38,7 @@ class TestLogger(unittest.TestCase):
         mock_file_handler.return_value = mock_handler
         
         # Call the method to test
-        logger = Logger(self.logger_name, self.temp_dir + '/', logging.DEBUG)
+        Logger(self.logger_name, self.temp_dir + '/', logging.DEBUG)
         
         # Verifications
         mock_get_logger.assert_called_once_with(self.logger_name)
