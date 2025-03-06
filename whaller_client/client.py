@@ -16,7 +16,7 @@ class Client:
         self.authenticator.authenticate(self.api)
     
     def get_api_token(self):
-        return self.authenticator.get_bearer_token()
+        return self.authenticator.get_bearer_token(self.api)
 
     def call_post(self, endpoint:str, data:dict={}, with_auth:bool=False) -> dict:
         headers = {}
