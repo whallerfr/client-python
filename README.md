@@ -8,25 +8,8 @@ This library is in the early stages of implementation and contains only a few en
 
 ## 📦 Installation
 
-### 1️⃣ **Clone the repository**
-
 ```sh
-git clone https://github.com/whallerfr/client-python.git
-cd client-python
-```
-
-### 2️⃣ **Install the package in development mode**
-
-```sh
-pip install -e .
-```
-
-This allows modifications and immediate testing of changes.
-
-### 3️⃣ **Install dependencies**
-
-```sh
-pip install -r requirements.txt
+pip install whaller-client
 ```
 
 ## 🚀 Try the examples
