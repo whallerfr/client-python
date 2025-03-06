@@ -19,6 +19,7 @@ client.set_credentials(LOGIN, PASSWORD)
 client.authenticate()
 
 me = Me(client)
-print(me.get_notifications(LOGIN))
 
-print(me.list_spheres())
+print(me.get())
+print(me.get_notifications(LOGIN))
+print(me.list_networks())
