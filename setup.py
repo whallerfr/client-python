@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="whaller-client",
-    version="0.1.0",
+    version="0.1.2",
     packages=find_packages(),
     install_requires=[
         "requests"
@@ -12,9 +12,9 @@ setup(
     description="Python SDK for interacting with the Whaller API",
     url="https://github.com/whallerfr/client-python",
     classifiers=[
-        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.10",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    python_requires='>=3.6',
+    python_requires='>=3.10',
 )
