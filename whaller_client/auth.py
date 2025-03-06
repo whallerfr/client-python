@@ -21,7 +21,7 @@ class Authenticator:
         response = api_client.call_json('person/login', 'POST', data, header_application)
         self.token = response['auth_token']
 
-    def get_bearer_token(self):
+    def get_bearer_token(self, api_client: ApiClient):
         if self.token is None:
-            self.authenticate()
+            self.authenticate(api_client)
         return {"Authorization": "Bearer " + self.token}
