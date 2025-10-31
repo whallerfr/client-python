@@ -14,6 +14,9 @@ class Client:
 
     def authenticate(self):
         self.authenticator.authenticate(self.api)
+
+    def refresh_token(self):
+        self.authenticator.refresh_token(self.api)
     
     def get_api_token(self):
         return self.authenticator.get_bearer_token(self.api)

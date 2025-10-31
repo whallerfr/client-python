@@ -25,3 +25,13 @@ class Authenticator:
         if self.token is None:
             self.authenticate(api_client)
         return {"Authorization": "Bearer " + self.token}
+
+    def refresh_token(self, api_client: ApiClient):
+        """
+        Refresh the token before it expires.
+        """
+        if self.token is None:
+            self.authenticate(api_client)
+        data = {'auth_token': self.token, 'login': self.login, 'renew': True}
+        response = api_client.call_json('person/status_auth_by_token', 'POST', data, self.get_bearer_token(api_client))
+        self.token = response['auth_token']

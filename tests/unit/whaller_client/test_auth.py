@@ -101,5 +101,68 @@ class TestAuthenticator(unittest.TestCase):
         self.authenticator.authenticate = original_authenticate
 
 
+    @patch('whaller_client.auth.Authenticator.get_bearer_token')
+    @patch('whaller_client.api.ApiClient.call_json')
+    def test_refresh_token_with_existing_token(self, mock_call_json, mock_get_bearer_token):
+        """Test refresh_token when a token already exists."""
+        # Arrange
+        self.authenticator.set_credentials('login_user', 'secret')
+        self.authenticator.token = 'existing_token'
+        mock_get_bearer_token.return_value = {"Authorization": "Bearer existing_token"}
+        mock_call_json.return_value = {"auth_token": "refreshed_token"}
+
+        mock_api_client = MagicMock()
+        mock_api_client.call_json = mock_call_json
+
+        # Act
+        self.authenticator.refresh_token(mock_api_client)
+
+        # Assert
+        expected_data = {"auth_token": "existing_token", "login": "login_user", "renew": True}
+        mock_call_json.assert_called_once_with(
+            'person/status_auth_by_token',
+            'POST',
+            expected_data,
+            {"Authorization": "Bearer existing_token"}
+        )
+        self.assertEqual(self.authenticator.token, 'refreshed_token')
+
+    @patch('whaller_client.auth.Authenticator.get_bearer_token')
+    @patch('whaller_client.api.ApiClient.call_json')
+    def test_refresh_token_without_existing_token_triggers_authenticate(self, mock_call_json, mock_get_bearer_token):
+        """Test refresh_token triggers authenticate when token is missing."""
+        # Arrange
+        self.authenticator.set_credentials('login_user', 'secret')
+        self.authenticator.token = None
+
+        # Patch instance authenticate to set an initial token
+        original_authenticate = self.authenticator.authenticate
+        def authenticate_side_effect(api_client):
+            self.authenticator.token = 'initial_token'
+        self.authenticator.authenticate = MagicMock(side_effect=authenticate_side_effect)
+
+        mock_get_bearer_token.return_value = {"Authorization": "Bearer initial_token"}
+        mock_call_json.return_value = {"auth_token": "refreshed_token"}
+
+        mock_api_client = MagicMock()
+        mock_api_client.call_json = mock_call_json
+
+        # Act
+        self.authenticator.refresh_token(mock_api_client)
+
+        # Assert
+        self.authenticator.authenticate.assert_called_once_with(mock_api_client)
+        expected_data = {"auth_token": "initial_token", "login": "login_user", "renew": True}
+        mock_call_json.assert_called_once_with(
+            'person/status_auth_by_token',
+            'POST',
+            expected_data,
+            {"Authorization": "Bearer initial_token"}
+        )
+        self.assertEqual(self.authenticator.token, 'refreshed_token')
+
+        # Restore original method
+        self.authenticator.authenticate = original_authenticate
+
 if __name__ == '__main__':
     unittest.main() 

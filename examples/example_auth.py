@@ -3,6 +3,7 @@
 
 import os
 import sys
+import time
 from whaller_client.client import Client
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -17,6 +18,9 @@ client = Client(BASE_URL, CLIENT_ID, CLIENT_TOKEN)
 try:
     client.set_credentials(LOGIN, PASSWORD)
     client.authenticate()
-    print("Authentication successful.")
+    print("Authentication successful. Token: " + client.get_api_token()['Authorization'])
+    time.sleep(1)
+    client.refresh_token()
+    print("Token refreshed. Token: " + client.get_api_token()['Authorization'])
 except Exception as e:
     print(f"Authentication failed: {e}")

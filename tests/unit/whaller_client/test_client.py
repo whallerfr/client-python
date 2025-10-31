@@ -45,6 +45,12 @@ class TestClient(unittest.TestCase):
         mock_get_bearer_token.assert_called_once_with(self.client.api)
         self.assertEqual(token, {"Authorization": "Bearer test_token"})
 
+    @patch('whaller_client.auth.Authenticator.refresh_token')
+    def test_refresh_token(self, mock_refresh_token):
+        """Test the refresh_token method delegates to authenticator with api client."""
+        self.client.refresh_token()
+        mock_refresh_token.assert_called_once_with(self.client.api)
+
     @patch('whaller_client.auth.Authenticator.get_bearer_token')
     @patch('whaller_client.api.ApiClient.call_json')
     def test_call_post_with_auth(self, mock_call_json, mock_get_bearer_token):
