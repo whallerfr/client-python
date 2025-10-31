@@ -12,6 +12,12 @@ This library is in the early stages of implementation and contains only a few en
 pip install whaller-client
 ```
 
+### Upgrade
+
+```sh
+pip install --upgrade whaller-client
+```
+
 ## 🚀 Try the examples
 
 ### 1️⃣ **Set environment variables**
