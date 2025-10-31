@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "whaller-client"
-version = "0.1.3"
+version = "0.1.4"
 description = "Python SDK for interacting with the Whaller API"
 authors = [
     {name = "Thomas Fauré", email = "thomas.faure@whaller.com"},
@@ -18,8 +18,8 @@ dependencies = [
     "requests"
 ]
 
-[tool.setuptools]
-packages = ["whaller_client"]
+[tool.setuptools.packages.find]
+include = ["whaller_client*"]
 
 [project.urls]
 Homepage = "https://github.com/whallerfr/client-python"

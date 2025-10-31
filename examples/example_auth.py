@@ -4,12 +4,18 @@
 import os
 import sys
 import time
-from whaller_client.client import Client
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.dirname(script_dir)
+sys.path.insert(0, parent_dir)
 sys.path.insert(0, script_dir)
 
-from examples.env import BASE_URL, CLIENT_ID, CLIENT_TOKEN, LOGIN, PASSWORD
+from whaller_client.client import Client
+
+try:
+    from examples.env import BASE_URL, CLIENT_ID, CLIENT_TOKEN, LOGIN, PASSWORD
+except ModuleNotFoundError:
+    from env import BASE_URL, CLIENT_ID, CLIENT_TOKEN, LOGIN, PASSWORD
 
 # Client initialization
 client = Client(BASE_URL, CLIENT_ID, CLIENT_TOKEN)
