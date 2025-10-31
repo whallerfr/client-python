@@ -8,7 +8,7 @@ version = "0.1.3"
 description = "Python SDK for interacting with the Whaller API"
 authors = [
     {name = "Thomas Fauré", email = "thomas.faure@whaller.com"},
-    {name = "Alexandre Pinsard", email = "alexandre.pinsard@whaller.fr"}
+    {name = "Alexandre Pinsard", email = "alexandre.pinsard@whaller.fr"},
     {name = "Erwan de Ferrières", email = "erwan.de-ferrieres@whaller.com"}
 ]
 license = {text = "MIT"}
